@@ -7,7 +7,7 @@ import (
 
 // check service admin
 func CheckServiceUserCampaign() error {
-	serviceAdmin := os.Getenv("SERVICE_ADMIN")
+	serviceAdmin := os.Getenv("SERVICE_CAMPAIGN")
 	if serviceAdmin == "" {
 		return errors.New("service admin is empty")
 	}
