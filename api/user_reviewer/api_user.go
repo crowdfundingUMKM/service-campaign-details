@@ -52,7 +52,7 @@ func GetReviewerId(input ReviewerIdInput) (string, error) {
 }
 
 // verify token from service user reviewer
-func VerifyTokenAdmin(input string) (string, error) {
+func VerifyTokenReviewer(input string) (string, error) {
 
 	err := CheckServiceUserReviewer()
 	if err != nil {

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"service-campaign-details/auth"
 	"service-campaign-details/config"
 	"service-campaign-details/core"
 	"service-campaign-details/database"
