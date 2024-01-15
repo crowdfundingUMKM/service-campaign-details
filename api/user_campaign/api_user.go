@@ -8,30 +8,30 @@ import (
 	"service-campaign-details/helper"
 )
 
-func GetReviewerId(input ReviewerIdInput) (string, error) {
+func GetCampaignId(input CampaignIdInput) (string, error) {
 	// check service admin
 
-	err := CheckServiceUserReviewer()
+	err := CheckServiceUserCampaign()
 	if err != nil {
 		return "", err
 	}
 
-	reviewerID := helper.UserReviwer{}
-	reviewerID.UnixReviewer = input.UnixID
+	campaignID := helper.UserAdmin{}
+	campaignID.UnixAdmin = input.UnixID
 	// fetch get /getAdminID from service api
-	serviceReviewer := os.Getenv("SERVICE_REVIEWER")
+	serviceAdmin := os.Getenv("SERVICE_CAMPAIGN")
 	// if service admin is empty return error
-	if serviceReviewer == "" {
-		return reviewerID.UnixReviewer, errors.New("service admin is empty")
+	if serviceAdmin == "" {
+		return campaignID.UnixAdmin, errors.New("service admin is empty")
 	}
-	resp, err := http.Get(serviceReviewer + "/api/v1/campaign/getUserCampaignID/" + reviewerID.UnixReviewer)
+	resp, err := http.Get(serviceAdmin + "/api/v1/campaign/getUserCampaignID/" + campaignID.UnixAdmin)
 	if err != nil {
-		return reviewerID.UnixReviewer, err
+		return campaignID.UnixAdmin, err
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return reviewerID.UnixReviewer, errors.New("failed to get admin status or admin not found")
+		return campaignID.UnixAdmin, errors.New("failed to get admin status or admin not found")
 	}
 
 	var response helper.AdminStatusResponse
@@ -45,7 +45,7 @@ func GetReviewerId(input ReviewerIdInput) (string, error) {
 	} else if response.Data.StatusAccountAdmin == "deactive" {
 		return "", errors.New("admin account is deactive")
 	} else if response.Data.StatusAccountAdmin == "active" {
-		return reviewerID.UnixReviewer, nil
+		return campaignID.UnixAdmin, nil
 	} else {
 		return "", errors.New("invalid admin status")
 	}
@@ -54,18 +54,18 @@ func GetReviewerId(input ReviewerIdInput) (string, error) {
 // verify token from service user admin
 func VerifyTokenAdmin(input string) (string, error) {
 
-	err := CheckServiceUserReviewer()
+	err := CheckServiceUserCampaign()
 	if err != nil {
 		return "", err
 	}
 
 	// fetch get /verifyToken from service api
-	serviceAdmin := os.Getenv("SERVICE_REVIEWER")
+	serviceAdmin := os.Getenv("SERVICE_ADMIN")
 	// if service admin is empty return error
 	if serviceAdmin == "" {
-		return "", errors.New("service user reviewer is empty")
+		return "", errors.New("service user campaign is empty")
 	}
-	req, err := http.NewRequest("GET", serviceAdmin+"/api/v1/verifyTokenReviewer", nil)
+	req, err := http.NewRequest("GET", serviceAdmin+"/api/v1/verifyTokenCampaign", nil)
 
 	if err != nil {
 		return "", err
@@ -85,7 +85,7 @@ func VerifyTokenAdmin(input string) (string, error) {
 		return "", errors.New("invalid token, account deactive or token expired")
 	}
 
-	var response helper.VerifyTokenApiUserReviewerResponse
+	var response helper.VerifyTokenApiUserCampaignResponse
 	err = json.NewDecoder(resp.Body).Decode(&response)
 	if err != nil {
 		return "", err
@@ -95,6 +95,6 @@ func VerifyTokenAdmin(input string) (string, error) {
 		return "", errors.New(response.Meta.Message)
 	}
 
-	return response.Data.UnixReviewer, nil
+	return response.Data.UnixCampaign, nil
 
 }

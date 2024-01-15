@@ -40,3 +40,60 @@ func FormatValidationError(err error) []string {
 
 	return errors
 }
+
+// Admin Request
+type UserAdmin struct {
+	UnixAdmin          string `json:"unix_admin"`
+	StatusAccountAdmin string `json:"status_account_admin"`
+}
+
+type AdminStatusResponse struct {
+	Meta Meta      `json:"meta"`
+	Data UserAdmin `json:"data"`
+}
+
+type VerifyTokenApiAdminResponse struct {
+	Meta Meta `json:"meta"`
+	Data struct {
+		UnixAdmin string `json:"admin_id"`
+		Succes    string `json:"success"`
+	} `json:"data"`
+}
+
+// User Campaign Request
+type UserCampaign struct {
+	UnixCampaign          string `json:"unix_campaign"`
+	StatusAccountCampaign string `json:"status_account_campaign"`
+}
+
+type UserCampaignResponse struct {
+	Meta Meta         `json:"meta"`
+	Data UserCampaign `json:"data"`
+}
+
+type VerifyTokenApiUserCampaignResponse struct {
+	Meta Meta `json:"meta"`
+	Data struct {
+		UnixCampaign string `json:"campaign_id"`
+		Succes       string `json:"success"`
+	} `json:"data"`
+}
+
+// User Reviewer Request
+type UserReviwer struct {
+	UnixReviewer          string `json:"unix_reviewer"`
+	StatusAccountReviewer string `json:"status_account_reviewer"`
+}
+
+type UserReviewerResponse struct {
+	Meta Meta        `json:"meta"`
+	Data UserReviwer `json:"data"`
+}
+
+type VerifyTokenApiUserReviewerResponse struct {
+	Meta Meta `json:"meta"`
+	Data struct {
+		UnixReviewer string `json:"reviewer_id"`
+		Succes       string `json:"success"`
+	} `json:"data"`
+}

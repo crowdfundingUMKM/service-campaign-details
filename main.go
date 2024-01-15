@@ -3,7 +3,10 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 	"service-campaign-details/config"
+	"service-campaign-details/core"
+	"service-campaign-details/database"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -22,8 +25,8 @@ func main() {
 	// config.InitLog()
 
 	// setup repository
-	// db := database.NewConnectionDB()
-	// campaignDetailRepository := core.NewRepository(db)
+	db := database.NewConnectionDB()
+	campaignDetailRepository := core.NewRepository(db)
 
 	// SETUP SERVICE
 	campaignDetailService := core.NewService(campaignDetailRepository)
@@ -49,7 +52,7 @@ func main() {
 
 	// Update Image Campaign With Verify Token User Campaign and unix_id : Cheack If campign not ready or not, If not create new image campaign
 
-	// Get Image Campaign With unix_id 
+	// Get Image Campaign With unix_id
 
 	// Update Campaign With Verify Token User Campaign
 
@@ -62,11 +65,9 @@ func main() {
 
 	// Get Campaign Detail ? Active : Done Status
 
-
-
 	// Admin Accsess
 	// Get Campaign Detail With Verify Token User Admin
-	
+
 	// Delete Campaign With Verify Token User Admin
 
 	// Get All Campaign With Verify Token User Admin ? Active : Deactive : Report : Done Status
@@ -92,13 +93,10 @@ func main() {
 
 	// Investor Accsess
 	// Get All Campaign Active With Verify Token User Investor ? Active : Done Status
-	
+
 	// Get Campaign Detail With Verify Token User Investor ? Active : Done Status
 
 	// Invest Campaign With Verify Token User Investor {With Transaction Service}
-
-
-
 
 	// end Rounting
 	url := fmt.Sprintf("%s:%s", os.Getenv("SERVICE_HOST"), os.Getenv("SERVICE_PORT"))
