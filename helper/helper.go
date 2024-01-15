@@ -60,6 +60,25 @@ type VerifyTokenApiAdminResponse struct {
 	} `json:"data"`
 }
 
+// User Investor Request
+type UserInvestor struct {
+	UnixInvestor          string `json:"unix_investor"`
+	StatusAccountInvestor string `json:"status_account_investor"`
+}
+
+type UserInvestorResponse struct {
+	Meta Meta         `json:"meta"`
+	Data UserInvestor `json:"data"`
+}
+
+type VerifyTokenApiUserInvestorResponse struct {
+	Meta Meta `json:"meta"`
+	Data struct {
+		UnixInvestor string `json:"investor_id"`
+		Succes       string `json:"success"`
+	} `json:"data"`
+}
+
 // User Campaign Request
 type UserCampaign struct {
 	UnixCampaign          string `json:"unix_campaign"`
