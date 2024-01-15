@@ -8,7 +8,7 @@ import (
 	"service-campaign-details/helper"
 )
 
-func GetReviewerId(input InvestorIdInput) (string, error) {
+func GetInvestorId(input InvestorIdInput) (string, error) {
 	// check service admin
 
 	err := CheckServiceUserInvestor()
@@ -63,7 +63,7 @@ func VerifyTokenInvestor(input string) (string, error) {
 	serviceAdmin := os.Getenv("SERVICE_INVESTOR")
 	// if service admin is empty return error
 	if serviceAdmin == "" {
-		return "", errors.New("service user reviewer is empty")
+		return "", errors.New("service user investor is empty")
 	}
 	req, err := http.NewRequest("GET", serviceAdmin+"/api/v1/verifyTokenInvestor", nil)
 
@@ -85,7 +85,7 @@ func VerifyTokenInvestor(input string) (string, error) {
 		return "", errors.New("invalid token, account deactive or token expired")
 	}
 
-	var response helper.VerifyTokenApiUserReviewerResponse
+	var response helper.UserInvestorResponse
 	err = json.NewDecoder(resp.Body).Decode(&response)
 	if err != nil {
 		return "", err
@@ -95,6 +95,6 @@ func VerifyTokenInvestor(input string) (string, error) {
 		return "", errors.New(response.Meta.Message)
 	}
 
-	return response.Data.UnixReviewer, nil
+	return response.Data.UnixInvestor, nil
 
 }

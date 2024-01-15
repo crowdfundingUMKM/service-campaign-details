@@ -34,7 +34,7 @@ func GetReviewerId(input ReviewerIdInput) (string, error) {
 		return reviewerID.UnixReviewer, errors.New("failed to get admin status or admin not found")
 	}
 
-	var response helper.AdminStatusResponse
+	var response helper.UserReviewerResponse
 	err = json.NewDecoder(resp.Body).Decode(&response)
 	if err != nil {
 		return "", err
@@ -42,16 +42,16 @@ func GetReviewerId(input ReviewerIdInput) (string, error) {
 
 	if response.Meta.Code != 200 {
 		return "", errors.New(response.Meta.Message)
-	} else if response.Data.StatusAccountAdmin == "deactive" {
-		return "", errors.New("admin account is deactive")
-	} else if response.Data.StatusAccountAdmin == "active" {
+	} else if response.Data.StatusAccountReviewer == "deactive" {
+		return "", errors.New("reviewer account is deactive")
+	} else if response.Data.StatusAccountReviewer == "active" {
 		return reviewerID.UnixReviewer, nil
 	} else {
-		return "", errors.New("invalid admin status")
+		return "", errors.New("invalid reviewer status")
 	}
 }
 
-// verify token from service user admin
+// verify token from service user reviewer
 func VerifyTokenAdmin(input string) (string, error) {
 
 	err := CheckServiceUserReviewer()

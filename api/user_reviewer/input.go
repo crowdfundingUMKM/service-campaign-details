@@ -9,5 +9,5 @@ type VerifyTokenUserReviewerInput struct {
 }
 
 type ReviewerId struct {
-	UnixCampaign string
+	UnixReviewer string
 }

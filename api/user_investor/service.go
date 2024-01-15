@@ -5,11 +5,11 @@ import (
 	"os"
 )
 
-// check service admin
+// check service user investor
 func CheckServiceUserInvestor() error {
-	serviceAdmin := os.Getenv("SERVICE_CAMPAIGN")
+	serviceAdmin := os.Getenv("SERVICE_INVESTOR")
 	if serviceAdmin == "" {
-		return errors.New("service admin is empty")
+		return errors.New("service user investor is empty")
 	}
 	return nil
 }

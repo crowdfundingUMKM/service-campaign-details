@@ -9,7 +9,7 @@ import (
 func CheckServiceUserReviewer() error {
 	serviceAdmin := os.Getenv("SERVICE_REVIEWER")
 	if serviceAdmin == "" {
-		return errors.New("service admin is empty")
+		return errors.New("service user reviewer is empty")
 	}
 	return nil
 }

@@ -9,7 +9,7 @@ import (
 func CheckServiceUserCampaign() error {
 	serviceAdmin := os.Getenv("SERVICE_CAMPAIGN")
 	if serviceAdmin == "" {
-		return errors.New("service admin is empty")
+		return errors.New("service user campaign is empty")
 	}
 	return nil
 }

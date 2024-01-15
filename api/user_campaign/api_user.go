@@ -16,25 +16,25 @@ func GetCampaignId(input CampaignIdInput) (string, error) {
 		return "", err
 	}
 
-	campaignID := helper.UserAdmin{}
-	campaignID.UnixAdmin = input.UnixID
+	campaignID := helper.UserCampaign{}
+	campaignID.UnixCampaign = input.UnixID
 	// fetch get /getAdminID from service api
-	serviceAdmin := os.Getenv("SERVICE_CAMPAIGN")
+	serviceCampaign := os.Getenv("SERVICE_CAMPAIGN")
 	// if service admin is empty return error
-	if serviceAdmin == "" {
-		return campaignID.UnixAdmin, errors.New("service admin is empty")
+	if serviceCampaign == "" {
+		return campaignID.UnixCampaign, errors.New("service user campaign is empty")
 	}
-	resp, err := http.Get(serviceAdmin + "/api/v1/campaign/getUserCampaignID/" + campaignID.UnixAdmin)
+	resp, err := http.Get(serviceCampaign + "/api/v1/campaign/getUserCampaignID/" + campaignID.UnixCampaign)
 	if err != nil {
-		return campaignID.UnixAdmin, err
+		return campaignID.UnixCampaign, err
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return campaignID.UnixAdmin, errors.New("failed to get admin status or admin not found")
+		return campaignID.UnixCampaign, errors.New("failed to get user campaign status or user campaign not found")
 	}
 
-	var response helper.AdminStatusResponse
+	var response helper.UserCampaignResponse
 	err = json.NewDecoder(resp.Body).Decode(&response)
 	if err != nil {
 		return "", err
@@ -42,10 +42,10 @@ func GetCampaignId(input CampaignIdInput) (string, error) {
 
 	if response.Meta.Code != 200 {
 		return "", errors.New(response.Meta.Message)
-	} else if response.Data.StatusAccountAdmin == "deactive" {
+	} else if response.Data.StatusAccountCampaign == "deactive" {
 		return "", errors.New("admin account is deactive")
-	} else if response.Data.StatusAccountAdmin == "active" {
-		return campaignID.UnixAdmin, nil
+	} else if response.Data.StatusAccountCampaign == "active" {
+		return campaignID.UnixCampaign, nil
 	} else {
 		return "", errors.New("invalid admin status")
 	}
