@@ -46,6 +46,8 @@ func main() {
 	// group api
 	api := router.Group("api/v1")
 
+	// routing
+	api.POST("/create-campaiugn")
 	// User Campaign Accsess
 	// Create Campign With Verify Token User Campaign : Cheack If user (user_campaign_id) have campaign or not, If not create new campaign
 

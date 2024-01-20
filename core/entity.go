@@ -13,9 +13,9 @@ type CampaignDetail struct {
 	Category         string    `json:"category"`
 	Description      string    `json:"description"`
 	AddressCampaign  string    `json:"address_campaign"`
-	GoalAmount       string    `json:"goal_amount"`
-	CurrentAmount    string    `json:"current_amount"`
-	MinimumInvest    string    `json:"minimum_invest"`
+	GoalAmount       int       `json:"goal_amount"`
+	CurrentAmount    int       `json:"current_amount"`
+	MinimumInvest    int       `json:"minimum_invest"`
 	InterestRate     int       `json:"interest_rate"`
 	TenorPeriod      int       `json:"tenor_period"`
 	DeadlineCampaign time.Time `json:"deadline_campaign"`
