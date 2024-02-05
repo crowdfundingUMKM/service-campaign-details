@@ -58,7 +58,7 @@ func AuthApiInvestorMiddleware(authService auth.Service, userService core.Servic
 			return
 		}
 
-		c.Set("currentUserAdmin", api_investor.InvestorId{UnixInvestor: investorID})
+		c.Set("currentUserInvestor", api_investor.InvestorId{UnixInvestor: investorID})
 		c.Next()
 	}
 }

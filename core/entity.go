@@ -9,10 +9,10 @@ type CampaignDetail struct {
 	ID               int       `json:"id"`
 	UnixID           string    `json:"unix_id"`
 	UserCampaignID   string    `json:"user_campaign_id"`
-	NameCampaign     string    `json:"name_campaign"`
-	Category         string    `json:"category"`
-	Description      string    `json:"description"`
-	AddressCampaign  string    `json:"address_campaign"`
+	TitleUMKM        string    `json:"title_umkm"`
+	CategoryUMKM     string    `json:"category_umkm"`
+	DescriptionUMKM  string    `json:"description_umkm"`
+	AddressUMKM      string    `json:"address_umkm"`
 	GoalAmount       int       `json:"goal_amount"`
 	CurrentAmount    int       `json:"current_amount"`
 	MinimumInvest    int       `json:"minimum_invest"`
@@ -28,9 +28,9 @@ type CampaignDetail struct {
 	DoneCampaign     string    `json:"done_campaign"`
 	Refund           string    `json:"refund"`
 	StatusRefund     string    `json:"status_refund"`
-	UpdateIDReviewer string    `json:"updateId_reviewer"`
-	UpdateIDAdmin    string    `json:"updateId_admin"`
-	UpdateAtAdmin    time.Time `json:"updateAt_admin"`
+	UpdateIDReviewer string    `json:"update_id_reviewer"`
+	UpdateIDAdmin    string    `json:"update_id_admin"`
+	UpdateAtAdmin    time.Time `json:"update_at_admin"`
 	CreatedAt        time.Time `json:"created_at"`
 	UpdatedAt        time.Time `json:"updated_at"`
 }

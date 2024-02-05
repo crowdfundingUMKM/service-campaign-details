@@ -93,7 +93,7 @@ type UserCampaignResponse struct {
 type VerifyTokenApiUserCampaignResponse struct {
 	Meta Meta `json:"meta"`
 	Data struct {
-		UnixCampaign string `json:"campaign_id"`
+		UnixCampaign string `json:"user_campaign_id"`
 		Succes       string `json:"success"`
 	} `json:"data"`
 }

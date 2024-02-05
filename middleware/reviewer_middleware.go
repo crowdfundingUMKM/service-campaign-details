@@ -58,7 +58,7 @@ func AuthApiReviewerMiddleware(authService auth.Service, userService core.Servic
 			return
 		}
 
-		c.Set("currentUserAdmin", api_reviewer.ReviewerId{UnixReviewer: reviewerID})
+		c.Set("currentUserReviewer", api_reviewer.ReviewerId{UnixReviewer: reviewerID})
 		c.Next()
 	}
 }

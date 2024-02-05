@@ -50,10 +50,10 @@ func AuthApiCampaignMiddleware(authService auth.Service, userService core.Servic
 			return
 		}
 
-		campaignID, err := api_campaign.VerifyTokenAdmin(tokenString)
+		campaignID, err := api_campaign.VerifyTokenCampaign(tokenString)
 
 		if err != nil { //wrong token
-			response := helper.APIResponse("Unauthorized API User Campaign", http.StatusUnauthorized, "error", err.Error())
+			response := helper.APIResponse("Unauthorized API User Campaign1", http.StatusUnauthorized, "error", err.Error())
 			c.AbortWithStatusJSON(http.StatusUnauthorized, response)
 			return
 		}

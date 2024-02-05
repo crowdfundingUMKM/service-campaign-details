@@ -52,7 +52,7 @@ func GetCampaignId(input CampaignIdInput) (string, error) {
 }
 
 // verify token from service user admin
-func VerifyTokenAdmin(input string) (string, error) {
+func VerifyTokenCampaign(input string) (string, error) {
 
 	err := CheckServiceUserCampaign()
 	if err != nil {
@@ -60,7 +60,7 @@ func VerifyTokenAdmin(input string) (string, error) {
 	}
 
 	// fetch get /verifyToken from service api
-	serviceAdmin := os.Getenv("SERVICE_ADMIN")
+	serviceAdmin := os.Getenv("SERVICE_CAMPAIGN")
 	// if service admin is empty return error
 	if serviceAdmin == "" {
 		return "", errors.New("service user campaign is empty")

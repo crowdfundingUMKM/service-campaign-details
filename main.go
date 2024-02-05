@@ -8,6 +8,8 @@ import (
 	"service-campaign-details/config"
 	"service-campaign-details/core"
 	"service-campaign-details/database"
+	"service-campaign-details/handler"
+	"service-campaign-details/middleware"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -34,7 +36,7 @@ func main() {
 	authService := auth.NewService()
 
 	// setup handler
-	campaignHandler := handler.NewUserHandler(campaignDetailService, authService)
+	campaignDetailHandler := handler.NewCampaignDetailsHandler(campaignDetailService, authService)
 
 	// RUN SERVICE
 	router := gin.Default()
@@ -47,7 +49,7 @@ func main() {
 	api := router.Group("api/v1")
 
 	// routing
-	api.POST("/create-campaiugn")
+	api.POST("/create_campaign", middleware.AuthApiCampaignMiddleware(authService, campaignDetailService), campaignDetailHandler.CreateCampaign)
 	// User Campaign Accsess
 	// Create Campign With Verify Token User Campaign : Cheack If user (user_campaign_id) have campaign or not, If not create new campaign
 
