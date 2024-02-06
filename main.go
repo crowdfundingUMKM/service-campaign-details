@@ -50,7 +50,12 @@ func main() {
 
 	// routing
 	api.POST("/create_campaign", middleware.AuthApiCampaignMiddleware(authService, campaignDetailService), campaignDetailHandler.CreateCampaign)
-	// User Campaign Accsess
+	// update information umkm
+	api.PUT("/update_information_umkm", middleware.AuthApiCampaignMiddleware(authService, campaignDetailService), campaignDetailHandler.UpdateInformationUmkm)
+	// update proposal umkm file gcp
+
+	// update more information umkm
+
 	// Create Campign With Verify Token User Campaign : Cheack If user (user_campaign_id) have campaign or not, If not create new campaign
 
 	// Create Image Campaign With Verify Token User Campaign and unix_id : Cheack If campign not ready or not, If not create new image campaign

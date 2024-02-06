@@ -9,6 +9,7 @@ import (
 type Service interface {
 	FindCampaignByCampaignId(campaignId string) (CampaignDetail, error)
 	CreateCampaign(input CreateCampaignInput, userId string) (CampaignDetail, error)
+	UpdateInformationUmkm(input UpdateInformationInput, userId string) (CampaignDetail, error)
 }
 
 type service struct {
@@ -44,4 +45,22 @@ func (s *service) CreateCampaign(input CreateCampaignInput, userId string) (Camp
 	}
 	return newCampaign, nil
 
+}
+
+func (s *service) UpdateInformationUmkm(input UpdateInformationInput, campaignId string) (CampaignDetail, error) {
+	campaign, err := s.repository.FindByUnixID(campaignId)
+	if err != nil {
+		return campaign, err
+	}
+	campaign.GoalAmount = input.GoalAmount
+	campaign.MinimumInvest = input.MinimumInvest
+	campaign.InterestRate = input.InterestRate
+	campaign.TenorPeriod = input.TenorPeriod
+	campaign.DeadlineCampaign = input.DeadlineCampaign
+
+	updatedCampaign, err := s.repository.UpdateInformationCampaign(campaign)
+	if err != nil {
+		return updatedCampaign, err
+	}
+	return updatedCampaign, nil
 }
